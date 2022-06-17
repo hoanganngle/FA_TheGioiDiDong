@@ -1,0 +1,161 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Máy chủ: localhost:3306
+-- Thời gian đã tạo: Th6 10, 2022 lúc 04:37 AM
+-- Phiên bản máy phục vụ: 10.4.24-MariaDB
+-- Phiên bản PHP: 8.1.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Cơ sở dữ liệu: `thegioididong`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tblcategories`
+--
+
+CREATE TABLE `tblcategories` (
+  `category_id` bigint(20) NOT NULL,
+  `category_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tblorder`
+--
+
+CREATE TABLE `tblorder` (
+  `order_id` bigint(20) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `order_date` date NOT NULL,
+  `total` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tblorderdetails`
+--
+
+CREATE TABLE `tblorderdetails` (
+  `detail_id` bigint(20) NOT NULL,
+  `order_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tblproduct`
+--
+
+CREATE TABLE `tblproduct` (
+  `product_id` bigint(20) NOT NULL,
+  `product_name` varchar(50) NOT NULL,
+  `category_id` bigint(20) NOT NULL,
+  `price` float NOT NULL,
+  `description` varchar(1000) CHARACTER SET utf8mb4 NOT NULL,
+  `brand` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tbluser`
+--
+
+CREATE TABLE `tbluser` (
+  `id` bigint(20) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `full_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `tblcategories`
+--
+ALTER TABLE `tblcategories`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Chỉ mục cho bảng `tblorder`
+--
+ALTER TABLE `tblorder`
+  ADD PRIMARY KEY (`order_id`);
+
+--
+-- Chỉ mục cho bảng `tblorderdetails`
+--
+ALTER TABLE `tblorderdetails`
+  ADD PRIMARY KEY (`detail_id`);
+
+--
+-- Chỉ mục cho bảng `tblproduct`
+--
+ALTER TABLE `tblproduct`
+  ADD PRIMARY KEY (`product_id`);
+
+--
+-- Chỉ mục cho bảng `tbluser`
+--
+ALTER TABLE `tbluser`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `tblcategories`
+--
+ALTER TABLE `tblcategories`
+  MODIFY `category_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `tblorder`
+--
+ALTER TABLE `tblorder`
+  MODIFY `order_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `tblorderdetails`
+--
+ALTER TABLE `tblorderdetails`
+  MODIFY `detail_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `tblproduct`
+--
+ALTER TABLE `tblproduct`
+  MODIFY `product_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `tbluser`
+--
+ALTER TABLE `tbluser`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
