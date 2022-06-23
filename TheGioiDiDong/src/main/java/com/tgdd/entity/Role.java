@@ -2,7 +2,9 @@ package com.tgdd.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -12,9 +14,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Role")
+@Table(name = "role")
 public class Role implements Serializable{
 
+	@Id
 	private boolean role_id;
 	private String role_name;
 }

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Collaborators")
+@Table(name = "collaborators")
 public class Collaborator implements Serializable{
 	@Id
 	private String collab_name;

@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Stock")
+@Table(name = "stock")
 public class Stock implements Serializable{
 
 	@Id
