@@ -2,10 +2,13 @@ package com.tgdd.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -21,9 +24,15 @@ public class OrderDetail implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int orderDetail_id;
-	private int order_id;
-	private int product_id;
+	@Column(name ="orderDetail_id")
+	private int orderDetailId;
 	private int price;
 	private int quantity;
+	@ManyToOne
+	@JoinColumn(name ="product_id")
+	private Product products;
+	@ManyToOne
+	@JoinColumn(name ="order_id")
+	private Order orders;
+	
 }

@@ -1,13 +1,19 @@
 package com.tgdd.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,15 +27,31 @@ public class Product implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Product_ID;
-	private String product_name;
+	@Column(name ="product_id")
+	private int productId;
+	@Column(name ="product_name")
+	private String productName;
 	private int price;
-	private int manufacture_id;
-	private int category_id;
-	private int product_warranty;
+	@Column(name ="product_warranty")
+	private int productWarranty;
 	private String image;
 	private String description;
-	private String store_Name;
+	@Column(name ="store_name")
+	private String storeName;
 	private boolean status;
+	@ManyToOne
+	@JoinColumn(name="manufacture_id")
+	private Manufacturer manufacturer;
+	@ManyToOne
+	@JoinColumn(name="category_id")
+	private Category category;
+//	@OneToMany(mappedBy = "products", cascade=CascadeType.ALL)
+//	private Set<Stock> stocks;
+	@OneToMany(mappedBy = "products", cascade=CascadeType.ALL)
+	private Set<OrderDetail> orderDetails;
+	@OneToMany(mappedBy = "products", cascade=CascadeType.ALL)
+	private Set<Bill>bills;
+	@ManyToMany(mappedBy = "products")
+	private Set<Store> stores;
 
 }

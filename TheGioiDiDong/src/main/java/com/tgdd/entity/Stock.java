@@ -2,6 +2,7 @@ package com.tgdd.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,9 @@ public class Stock implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int store_id;
-	private int product_id;
+	@Column(name ="store_id")
+	private int storeId;
+	@Column(name ="product_id")
+	private int productId;
 	private String stock;
 }
