@@ -25,25 +25,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "store")
-public class Store implements Serializable{
+public class Store implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name ="store_id")
-	private int storeId;
-	@Column(name ="storeName")
+	@Column(name = "store_id")
+	private Integer storeId;
+	@Column(name = "storeName")
 	private String store_name;
-	@Column(name ="stock_in_store")
-	private int stockInStore;
+	@Column(name = "stock_in_store")
+	private Integer stockInStore;
 	private String address;
-	@Column(name ="city_name")
+	@Column(name = "city_name")
 	private String cityName;
-	@OneToMany(mappedBy = "store",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
 	private Set<Bill> bills;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "product_store",
-	         joinColumns = @JoinColumn(name="store_id"),
-	         inverseJoinColumns = @JoinColumn(name="product_id")
-	)
+	@JoinTable(name = "product_store", joinColumns = @JoinColumn(name = "store_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
 	private Set<Product> products;
 }

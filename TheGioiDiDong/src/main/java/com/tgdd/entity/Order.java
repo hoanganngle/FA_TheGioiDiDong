@@ -18,24 +18,25 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "orders")
-public class Order implements Serializable{
+public class Order implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name ="order_id")
-	private int orderId;
+	@Column(name = "order_id")
+	private Integer orderId;
 	private Date time;
-	private int total;
-	@OneToMany(mappedBy = "orders", cascade=CascadeType.ALL)
+	private Integer total;
+	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
 	private Set<OrderDetail> orderDetails;
-	@OneToMany(mappedBy = "orders", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
 	private Set<Bill> bills;
 	@ManyToOne
-	@JoinColumn(name="phone_number")
+	@JoinColumn(name = "phone_number")
 	private Customer customer;
 }

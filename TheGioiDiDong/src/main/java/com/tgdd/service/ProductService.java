@@ -12,15 +12,15 @@ public class ProductService {
 
 	@Autowired
 	ProductRepository repo;
-	
+
 	public Product save(Product product) {
 		return repo.save(product);
-		
-	}
-	public List<Product> getAllProducts() {
-		
-		return repo.findAll();
+
 	}
 
+	public List<Product> getAllProducts() {
+
+		return repo.findAll();
+	}
 
 }

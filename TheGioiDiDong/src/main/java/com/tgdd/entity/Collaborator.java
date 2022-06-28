@@ -16,18 +16,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "collaborators")
-public class Collaborator implements Serializable{
+public class Collaborator implements Serializable {
 	@Id
-	@Column(name ="collab_name")
+	@Column(name = "collab_name")
 	private String collabName;
 	private String password;
 	@ManyToOne
-	@JoinColumn(name= "role_id")
+	@JoinColumn(name = "role_id")
 	private Role role;
-	
+
 }

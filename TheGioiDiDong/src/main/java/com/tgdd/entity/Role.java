@@ -16,17 +16,18 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "role")
-public class Role implements Serializable{
+public class Role implements Serializable {
 
 	@Id
-	@Column(name ="role_id")
+	@Column(name = "role_id")
 	private boolean roleId;
-	@Column(name ="role_name")
+	@Column(name = "role_name")
 	private String roleName;
 	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
 	private Set<Collaborator> collaborators;

@@ -14,25 +14,26 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "orderDetails")
 
-public class OrderDetail implements Serializable{
+public class OrderDetail implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name ="orderDetail_id")
-	private int orderDetailId;
-	private int price;
-	private int quantity;
+	@Column(name = "orderDetail_id")
+	private Integer orderDetailId;
+	private Integer price;
+	private Integer quantity;
 	@ManyToOne
-	@JoinColumn(name ="product_id")
+	@JoinColumn(name = "product_id")
 	private Product products;
 	@ManyToOne
-	@JoinColumn(name ="order_id")
+	@JoinColumn(name = "order_id")
 	private Order orders;
-	
+
 }
