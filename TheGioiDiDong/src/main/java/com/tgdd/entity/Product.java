@@ -40,6 +40,7 @@ public class Product implements Serializable {
 	@Column(name = "store_name")
 	private String storeName;
 	private boolean status;
+	private Integer unit;
 	@ManyToOne
 	@JoinColumn(name = "manufacture_id")
 	private Manufacturer manufacturer;
