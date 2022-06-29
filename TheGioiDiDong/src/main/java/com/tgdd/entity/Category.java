@@ -20,8 +20,6 @@ import lombok.Setter;
 
 @Entity
 @Data
-@Setter
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "category")
