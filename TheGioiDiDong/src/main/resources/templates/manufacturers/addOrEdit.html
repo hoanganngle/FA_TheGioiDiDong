@@ -16,32 +16,32 @@
           <header class="card-header">TheGioiDiDong</header>
           <section class="row">
           <div class="col-8 offset-3 mt-4">
-              <form th:action="@{/categories/saveOrUpdate}" method="post" th:object="${category}">
+              <form th:action="@{/manufacturers/saveOrUpdate}" method="post" th:object="${manufacturer}">
                   <div class="card">
                       <div class="card-header">
-                          <h2>Add New Category</h2>
+                          <h2>Add New Manufacturer</h2>
 
                       </div>
                       <div class="card-body">
                         <div class="form-group">
-                            <label for="categoryId">Category ID:</label>
+                            <label for="manufacturerId">Manufacturer ID:</label>
                             <input type="hidden" th:field="*{isEdit}">
-                            <input type="text" class="form-control" th:field="*{categoryId}"
-                             aria-describedby="categoryIdHid" placeholder="Category ID" readonly>
-                            <small id="categoryIdHid" class="form-text text-muted">category Id is required</small>
+                            <input type="text" class="form-control" th:field="*{manufacturerId}"
+                             aria-describedby="manufacturerIdHid" placeholder="Manufacturer ID" readonly>
+                            <small id="manufacturerIdHid" class="form-text text-muted">Manufacturer Id is required</small>
                           </div>
                          <div class="form-group">
-                           <label for="name">Name</label>
-                           <input type="text" class="form-control" th:field="*{categoryName}" id="categoryName" aria-describedby="nameJid" placeholder="Category Name" required>
+                           <label for="manufacturerName">manufacturer Name</label>
+                           <input type="text" class="form-control" th:field="*{manufacturerName}" id="manufacturerName" aria-describedby="nameJid" placeholder="Manufacturer Name " required>
                            <small id="nameHid" class="form-text text-muted">Name is required</small>
                          </div>
                       </div>
                       <div class="card-footer text-muted">
                           <button type="reset" class="btn btn-secondary">Reset</button>
-                          <a th:href="@{/categories}" class="btn btn-success">List Category</a>
+                          <a th:href="@{/manufacturers}" class="btn btn-success">List Manufacturers</a>
                           <button class="btn.btn-primary"> <i class="fas fa-save"></i>
-                            <span th:if="${category.isEdit}">Update</span>
-                            <span th:unless="${category.isEdit}">Save</span> 
+                            <span th:if="${manufacturer.isEdit}">Update</span>
+                            <span th:unless="${manufacturer.isEdit}">Save</span> 
                         </button>
                       </div>
                   </div>
