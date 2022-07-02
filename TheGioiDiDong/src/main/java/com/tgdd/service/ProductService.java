@@ -23,4 +23,14 @@ public class ProductService {
 		return repo.findAll();
 	}
 
+	public void DeteleProduct(Integer id){
+		 repo.deleteById(id);
+	}
+	
+	public Product get(Integer id) {
+		return repo.findById(id).get();
+	}
+	
+}
+
 }
