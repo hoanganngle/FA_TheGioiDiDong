@@ -27,7 +27,7 @@ public class Manufacturer implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "manufacturer_id")
-	private Integer manufacturerId;
+	private Long manufacturerId;
 	@Column(name = "manufacturer_name")
 	private String manufacturerName;
 	@OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL)

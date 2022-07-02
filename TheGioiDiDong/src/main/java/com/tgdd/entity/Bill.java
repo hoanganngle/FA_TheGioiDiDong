@@ -24,7 +24,7 @@ public class Bill implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "bill_id")
-	private Integer billId;
+	private Long billId;
 	@Column(name = "price")
 	private Integer price;
 	@ManyToOne

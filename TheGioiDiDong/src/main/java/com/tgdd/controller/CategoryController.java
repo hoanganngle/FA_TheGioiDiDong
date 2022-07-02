@@ -1,74 +1,61 @@
 package com.tgdd.controller;
 
-import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.tgdd.dto.CategoryDto;
 import com.tgdd.entity.Category;
 import com.tgdd.service.CategoryService;
 
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
 
-@Controller
+@RestController
 @RequestMapping("categories")
 public class CategoryController {
 	@Autowired
-	CategoryService categoryService;
+	private CategoryService categoryService;
 
+	@PostMapping("/")
+	public ResponseEntity<Category> addCategory(@RequestBody Category category) {
+		
+		return new ResponseEntity<>(categoryService.addCategory(category),HttpStatus.OK);
+		
+	}
 	
-	@GetMapping("add")
-	public String add(Model model) {
-		model.addAttribute("category", new CategoryDto());
+	@PutMapping("/{categoryId}")
+    public ResponseEntity<Category> updateCategory(@PathVariable Long categoryId, @RequestBody Category category) {
+        Optional<Category> categoryOptional = categoryService.findCategoriesById(categoryId);
+        return categoryOptional.map(category1 -> {
+            category.setCategoryId(category1.getCategoryId());
+            return new ResponseEntity<>(categoryService.addCategory(category), HttpStatus.OK);
+        }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+}
+	@DeleteMapping("/{categoryId}")
+	private ResponseEntity<Category> deleteCategory(@PathVariable Long categoryId){
+		Optional<Category> categoryOptional = categoryService.findCategoriesById(categoryId);
+		return categoryOptional.map(category -> {
+			categoryService.deleteCategory(categoryId);
+			return new ResponseEntity<>(category,HttpStatus.OK);
+		}).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 		
-		return "categories/addOrEdit";
 	}
-	@GetMapping("edit/{categoryId}")
-	public ModelAndView edit(ModelMap model, @PathVariable("categoryId") long categoryId) {
-		Optional<Category> opt = categoryService.findById(categoryId);
-		CategoryDto dto = new CategoryDto();
-		if(opt.isPresent()) {
-			Category entity = opt.get();
-			BeanUtils.copyProperties(entity, dto);
-			dto.setIsEdit(true);
-			
-			model.addAttribute("category", dto);
-			return new ModelAndView("categories/addOrEdit",model);
-		}
-		model.addAttribute("message", "Category is not exited");
-		
-		return new ModelAndView("forward:/categories",model);
-	}
-	@GetMapping("delete/{categoryId}")
-	public String delete() {
-		return "redirect:/categories ";
-	}
-	@PostMapping("saveOrUpdate")
-	public ModelAndView saveOrUpdate(ModelMap model,CategoryDto dto) {
-		Category entity = new Category();
-		BeanUtils.copyProperties(dto, entity);
-		categoryService.save(entity);
-		model.addAttribute("message", "Category is Saved!");
-		return new ModelAndView("forward:/categories", model);
-	}
-	@RequestMapping("")
-	public String list(ModelMap model) {
-		List<Category> list = categoryService.findAll();
-		model.addAttribute("categories", list);
-		return "categories/list";
-	}
-	@GetMapping("search")
-	public String search() {
-		return "categories/search";
-	}
+	@GetMapping
+    public ResponseEntity<Iterable<Category>> getAllCategory() {
+        return new ResponseEntity<>(categoryService.getAllCategories(), HttpStatus.OK);
+    }
+	@GetMapping("/{categoryId}")
+    public ResponseEntity<Category> getCategory(@PathVariable Long categoryId) {
+        Optional<Category> categoryOptional = categoryService.findCategoriesById(categoryId);
+        return categoryOptional.map(category -> new ResponseEntity<>(category, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+}
 }

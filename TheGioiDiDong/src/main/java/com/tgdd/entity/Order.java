@@ -29,7 +29,7 @@ public class Order implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id")
-	private Integer orderId;
+	private Long orderId;
 	private Date time;
 	private Integer total;
 	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
