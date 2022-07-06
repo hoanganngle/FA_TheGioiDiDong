@@ -43,4 +43,9 @@ public class CategoryController {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(new ResponseObject("ok", "Delete category successsful", categoryService.deleteCategory(id)));
 	}
+	@GetMapping
+	public ResponseEntity<ResponseObject> getAllCategories() {
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(new ResponseObject("ok", "List Category successfully", categoryService.getAllCategory()));
+	}	
 }
