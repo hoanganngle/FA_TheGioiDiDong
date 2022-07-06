@@ -1,24 +1,25 @@
 package com.tgdd.service;
 
 import java.util.List;
-import java.util.Optional;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.tgdd.dto.CategoryDto;
 import com.tgdd.entity.Category;
 
+@Service
 public interface CategoryService {
 
-	//add category
-	Category addCategory(Category category);
+	public CategoryDto addCategory(CategoryDto categoryDto);
+
+	public CategoryDto updateCategory(long id , CategoryDto categoryDto);
+
+	public ResponseEntity<?>  deleteCategory(long id);
 	
-	// update category
-	Category updateCategories(long id, Category category);
-
-	// delete category
-	void deleteCategory(long id);
-
-	// list category
-	List<Category> getAllCategories();
-
-	// get 1 category
-	Optional<Category> findCategoriesById(long id);
-
+	public List<CategoryDto> getAllCategory();
+	
+	public Category findbyIdCategory(long id);
+	
+	
 }

@@ -1,6 +1,7 @@
 package com.tgdd.controller;
 
-import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tgdd.dto.CategoryDto;
 import com.tgdd.entity.Category;
+import com.tgdd.entity.ResponseObject;
 import com.tgdd.service.CategoryService;
+
 
 
 @RestController
@@ -24,38 +28,26 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 
-	@PostMapping("/")
-	public ResponseEntity<Category> addCategory(@RequestBody Category category) {
-		
-		return new ResponseEntity<>(categoryService.addCategory(category),HttpStatus.OK);
-		
+	@PostMapping
+	public CategoryDto addCategory(@Valid @RequestBody CategoryDto categoryDto) {
+		return categoryService.addCategory(categoryDto);
 	}
-	
-	@PutMapping("/{categoryId}")
-    public ResponseEntity<Category> updateCategory(@PathVariable Long categoryId, @RequestBody Category category) {
-        Optional<Category> categoryOptional = categoryService.findCategoriesById(categoryId);
-        return categoryOptional.map(category1 -> {
-            category.setCategoryId(category1.getCategoryId());
-            return new ResponseEntity<>(categoryService.addCategory(category), HttpStatus.OK);
-        }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-}
-	@DeleteMapping("/{categoryId}")
-	private ResponseEntity<Category> deleteCategory(@PathVariable Long categoryId){
-		Optional<Category> categoryOptional = categoryService.findCategoriesById(categoryId);
-		return categoryOptional.map(category -> {
-			categoryService.deleteCategory(categoryId);
-			return new ResponseEntity<>(category,HttpStatus.OK);
-		}).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-		
+
+	@PutMapping("/{id}")
+	public ResponseEntity<ResponseObject> updateCategory(@PathVariable long id,@Valid @RequestBody CategoryDto categoryDto) {
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "update category successfully",
+				categoryService.updateCategory(id, categoryDto)));
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<ResponseObject> deleteCategory(@PathVariable("id") long id) {
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(new ResponseObject("ok", "Delete category successsful", categoryService.deleteCategory(id)));
 	}
 	@GetMapping
-    public ResponseEntity<Iterable<Category>> getAllCategory() {
-        return new ResponseEntity<>(categoryService.getAllCategories(), HttpStatus.OK);
-    }
-	@GetMapping("/{categoryId}")
-    public ResponseEntity<Category> getCategory(@PathVariable Long categoryId) {
-        Optional<Category> categoryOptional = categoryService.findCategoriesById(categoryId);
-        return categoryOptional.map(category -> new ResponseEntity<>(category, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-}
+	public ResponseEntity<ResponseObject> getAllCategories() {
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(new ResponseObject("ok", "List Category successfully", categoryService.getAllCategory()));
+	}	
+
 }
