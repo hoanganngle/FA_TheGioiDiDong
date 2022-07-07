@@ -35,7 +35,7 @@ public class Order implements Serializable {
 	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
 	private Set<OrderDetail> orderDetails;
 	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
-	private Set<Bill> bills;
+	private Set<Cart> carts;
 	@ManyToOne
 	@JoinColumn(name = "phone_number")
 	private Customer customer;
