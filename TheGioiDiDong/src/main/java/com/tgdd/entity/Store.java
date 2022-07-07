@@ -33,14 +33,9 @@ public class Store implements Serializable {
 	private Long storeId;
 	@Column(name = "storeName")
 	private String store_name;
-	@Column(name = "stock_in_store")
-	private Integer stockInStore;
 	private String address;
 	@Column(name = "city_name")
 	private String cityName;
 	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-	private Set<Bill> bills;
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "product_store", joinColumns = @JoinColumn(name = "store_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
-	private Set<Product> products;
+	private Set<Cart> carts;
 }

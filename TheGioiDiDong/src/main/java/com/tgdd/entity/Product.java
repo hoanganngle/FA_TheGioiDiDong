@@ -56,8 +56,6 @@ public class Product implements Serializable {
 	@OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
 	private Set<OrderDetail> orderDetails;
 	@OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
-	private Set<Bill> bills;
-	@ManyToMany(mappedBy = "products")
-	private Set<Store> stores;
+	private Set<Cart> carts;
 
 }

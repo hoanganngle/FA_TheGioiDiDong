@@ -19,12 +19,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "bill")
-public class Bill implements Serializable {
+@Table(name = "cart")
+public class Cart implements Serializable {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "bill_id")
-	private Long billId;
+	@Column(name = "cart_id")
+	private Long cartId;
 	@Column(name = "price")
 	private Integer price;
 	@ManyToOne
