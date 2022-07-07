@@ -17,11 +17,17 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "products")
 
 public class Product implements Serializable {
@@ -47,8 +53,6 @@ public class Product implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
-//	@OneToMany(mappedBy = "products", cascade=CascadeType.ALL)
-//	private Set<Stock> stocks;
 	@OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
 	private Set<OrderDetail> orderDetails;
 	@OneToMany(mappedBy = "products", cascade = CascadeType.ALL)

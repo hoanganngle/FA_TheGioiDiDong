@@ -2,35 +2,28 @@ package com.tgdd.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.tgdd.dto.ProductDto;
 import com.tgdd.entity.Product;
-import com.tgdd.repository.ProductRepository;
+
 
 @Service
-public class ProductService {
+public interface ProductService {
 
-	@Autowired
-	ProductRepository repo;
 
-	public Product save(Product product) {
-		return repo.save(product);
-
-	}
-
-	public List<Product> getAllProducts() {
-
-		return repo.findAll();
-	}
-
-	public void DeteleProduct(Integer id){
-		 repo.deleteById(id);
-	}
+ResponseEntity<?> addProduct(ProductDto productDto);
 	
-	public Product get(Integer id) {
-		return repo.findById(id).get();
-	}
+	ResponseEntity<?> updateProduct(Integer id , ProductDto productDto);
+
+	ResponseEntity<?> deleteProduct(Integer id);
 	
+	 ResponseEntity<?> getAllProduct();
+	
+	 List<ProductDto> getAllProductbyCategory(long id);
+
+	 ProductDto findByIdProduct(Integer id);
 }
 
 

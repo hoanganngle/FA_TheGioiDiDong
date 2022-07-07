@@ -2,62 +2,57 @@ package com.tgdd.controller;
 
 import java.util.List;
 
-import org.springframework.ui.Model;
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.tgdd.repository.ProductRepository;
+import com.tgdd.dto.ProductDto;
 import com.tgdd.entity.Product;
+import com.tgdd.entity.ResponseObject;
 import com.tgdd.service.ProductService;
 
 public class ProductController {
 	
-	private ProductRepository repopr;
-	
-	private ProductService productService;
-	
-	@GetMapping("/list_product")
-	public String viewProductList(Model model) {
-		List<Product> listProduct = repopr.findAll();
-		model.addAttribute("listProduct", listProduct);
-		return "product";
+	@Autowired
+	private ProductService productServices;
+
+	@PostMapping("/")
+	public ResponseEntity<?> addProduct(@Valid @RequestBody ProductDto productDto) {
+		return productServices.addProduct(productDto);
 	}
 
-	@GetMapping("/new")
-	public String showNewProductPage(Model model) {
-		Product pr = new Product();
-		model.addAttribute("newpr", pr);
-		return "createproduct";
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updateProduct(@PathVariable("id") Integer id, @Valid @RequestBody ProductDto productDto) {
+
+		return productServices.updateProduct(id, productDto);
+
 	}
 
-	@RequestMapping("/edit/{id}")
-	public ModelAndView showEditProductPage(@PathVariable(name = "id") int id) {
-		ModelAndView mav = new ModelAndView("edit_product");
-		Product product = productService.get(id);
-		mav.addObject("newpr", product);
-		return mav;
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteProduct(@PathVariable("id") Integer id) {
+		return productServices.deleteProduct(id);
 	}
 
-	@RequestMapping("/delete/{id}")
-	public String deleteProduct(@PathVariable(name = "id") int id) {
-		productService.DeteleProduct(id);
-		return "redirect:/list_product";
+	@GetMapping("/")
+	public ResponseEntity<?> getAllProducts() {
+		return productServices.getAllProduct();
 	}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveProduct(@ModelAttribute("newpr") Product product) {
-		repopr.save(product);
-		return "redirect:/list_product";
-	}
-
-	@GetMapping("/list_product/{id}")
-	public String getProductId(Model model, @PathVariable("id") Integer id) {
-		Product product = productService.get(id);
-		model.addAttribute("product", product);
-		return "viewproduct";
-	}
+//	@GetMapping("/{id}")
+//	public ResponseEntity<ResponseObject> getAllProductsByCategory(@PathVariable("id") Integer id) {
+//		return ResponseEntity.status(HttpStatus.OK).body(
+//				new ResponseObject("ok", "List product successfully", productServices.getAllProductbyCategory(id)));
+//
+//	}
 }
