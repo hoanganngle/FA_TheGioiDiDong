@@ -21,7 +21,7 @@ ResponseEntity<?> addProduct(ProductDto productDto);
 	
 	 ResponseEntity<?> getAllProduct();
 	
-	 List<ProductDto> getAllProductbyCategory(long id);
+	 List<ProductDto> getAllProductbyCategory(Integer id);
 
 	 ProductDto findByIdProduct(Integer id);
 }
