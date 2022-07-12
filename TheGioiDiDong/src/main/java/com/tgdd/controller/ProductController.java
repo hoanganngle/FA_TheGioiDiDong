@@ -49,10 +49,10 @@ public class ProductController {
 		return productServices.getAllProduct();
 	}
 
-//	@GetMapping("/{id}")
-//	public ResponseEntity<ResponseObject> getAllProductsByCategory(@PathVariable("id") Integer id) {
-//		return ResponseEntity.status(HttpStatus.OK).body(
-//				new ResponseObject("ok", "List product successfully", productServices.getAllProductbyCategory(id)));
-//
-//	}
+	@GetMapping("/{id}")
+	public ResponseEntity<ResponseObject> getAllProductsByCategory(@PathVariable("id") Integer id) {
+		return ResponseEntity.status(HttpStatus.OK).body(
+				new ResponseObject("ok", "List product successfully", productServices.getAllProductbyCategory(id)));
+
+	}
 }
