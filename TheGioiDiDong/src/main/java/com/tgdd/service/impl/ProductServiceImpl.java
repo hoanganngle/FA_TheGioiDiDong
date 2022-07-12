@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.tgdd.service.ProductService;
 import com.tgdd.dto.ProductDto;
@@ -17,7 +18,7 @@ import com.tgdd.exceptions.handlers.ResourceFoundExceptions;
 import com.tgdd.repository.CategoryRepository;
 import com.tgdd.repository.ProductRepository;
 import com.tgdd.response.MessageResponse;
-
+@Service
 public class ProductServiceImpl implements ProductService{
 	@Autowired
 	ProductRepository productRepository;

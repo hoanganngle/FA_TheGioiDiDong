@@ -10,7 +10,7 @@ import com.tgdd.entity.Customer;
 @Service
 public interface CustomerService {
 	
-	public ResponseEntity<?> addCustomer(CustomerDto customerDto);
+	public CustomerDto addCustomer(CustomerDto customerDto);
 	
 	public ResponseEntity<?> getOrdersbyPhoneNumber(Long phoneNuber);
 	

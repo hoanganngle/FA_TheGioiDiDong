@@ -21,13 +21,13 @@ import com.tgdd.dto.ProductDto;
 import com.tgdd.entity.Product;
 import com.tgdd.entity.ResponseObject;
 import com.tgdd.service.ProductService;
-
+@RestController
 public class ProductController {
 	
 	@Autowired
 	private ProductService productServices;
 
-	@PostMapping("/")
+	@PostMapping
 	public ResponseEntity<?> addProduct(@Valid @RequestBody ProductDto productDto) {
 		return productServices.addProduct(productDto);
 	}
@@ -44,7 +44,7 @@ public class ProductController {
 		return productServices.deleteProduct(id);
 	}
 
-	@GetMapping("/")
+	@GetMapping
 	public ResponseEntity<?> getAllProducts() {
 		return productServices.getAllProduct();
 	}
