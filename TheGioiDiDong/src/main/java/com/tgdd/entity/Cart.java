@@ -26,8 +26,8 @@ public class Cart implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cart_id")
 	private Long cartId;
-	@Column(name = "price")
-	private Integer price;
+	@Column(name = "quantity")
+	private Integer quantity;
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order orders;

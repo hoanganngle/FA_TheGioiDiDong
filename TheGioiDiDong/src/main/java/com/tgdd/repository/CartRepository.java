@@ -9,7 +9,7 @@ import com.tgdd.entity.Cart;
 
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long> {	
-	@Query("SELECT c FROM Cart c WHERE c.customer.phoneNumber = :phoneNumber")
-	public List<Cart> findByPhoneNumber(Long phoneNumber);
+	@Query("SELECT c FROM Cart c WHERE c.customer.phone_number = :phone_number")
+	public List<Cart> findByPhoneNumber(Long phone_number);
 
 }
