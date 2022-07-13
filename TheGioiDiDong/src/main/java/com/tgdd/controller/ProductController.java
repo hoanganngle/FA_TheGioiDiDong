@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,16 +24,20 @@ import com.tgdd.entity.ResponseObject;
 import com.tgdd.service.ProductService;
 @RestController
 public class ProductController {
-	
+//	Preauthorize chưa có login nên để vào cmt
 	@Autowired
 	private ProductService productServices;
 
-	@PostMapping
+	@PostMapping("/")
+//	@PreAuthorize("hasAuthority('admin')")
+
 	public ResponseEntity<?> addProduct(@Valid @RequestBody ProductDto productDto) {
 		return productServices.addProduct(productDto);
 	}
 
 	@PutMapping("/{id}")
+//	@PreAuthorize("hasAuthority('admin')")
+
 	public ResponseEntity<?> updateProduct(@PathVariable("id") Integer id, @Valid @RequestBody ProductDto productDto) {
 
 		return productServices.updateProduct(id, productDto);
@@ -40,6 +45,7 @@ public class ProductController {
 	}
 
 	@DeleteMapping("/{id}")
+//	@PreAuthorize("hasAuthority('admin')"))
 	public ResponseEntity<?> deleteProduct(@PathVariable("id") Integer id) {
 		return productServices.deleteProduct(id);
 	}

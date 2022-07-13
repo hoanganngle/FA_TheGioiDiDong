@@ -12,7 +12,7 @@ import com.tgdd.entity.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	@Query("SELECT p FROM Product p where id_Category = :idCategory")
-	 List<Product> getProductbyIdcategory(@Param("idCategory")Long id);
+	 List<Product> getProductbyIdcategory(@Param("idCategory")Integer id);
 	  List<Product> findByProductName(String productName);
-	  Product findByProductId(Long id);
+	  Product findByProductId(Integer id);
 }
