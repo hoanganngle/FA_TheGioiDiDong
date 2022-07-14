@@ -14,9 +14,9 @@ public class MessageResponse {
 //		this.message=message;
 //	}
 
-	public MessageResponse(String string) {
-		// TODO Auto-generated constructor stub
-	}
+//	public MessageResponse(String string) {
+//		// TODO Auto-generated constructor stub
+//	}
 
 	public String getMessage() {
         return message;
