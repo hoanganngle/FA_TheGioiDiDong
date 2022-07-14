@@ -1,6 +1,8 @@
 package com.tgdd.controller;
 
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tgdd.dto.CategoryDto;
 import com.tgdd.entity.ResponseObject;
+import com.tgdd.exceptions.handlers.ResourceFoundExceptions;
 import com.tgdd.service.CategoryService;
 
 @RestController
@@ -26,24 +29,23 @@ public class CategoryController {
 	private CategoryService categoryService;
 
 	@PostMapping
-	public CategoryDto addCategory(@Valid @RequestBody CategoryDto categoryDto) {
+	public CategoryDto addCategory(@Valid @RequestBody CategoryDto categoryDto) throws ResourceFoundExceptions{
 		return categoryService.addCategory(categoryDto);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ResponseObject> updateCategory(@PathVariable long id,@Valid @RequestBody CategoryDto categoryDto) {
-		return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "update category successfully",
-				categoryService.updateCategory(id, categoryDto)));
+	public CategoryDto updateCategory(@PathVariable long id,@Valid @RequestBody CategoryDto categoryDto) throws ResourceFoundExceptions {
+		return categoryService.updateCategory(id, categoryDto);
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseObject> deleteCategory(@PathVariable("id") long id) {
+	public ResponseEntity<?> deleteCategory(@PathVariable("id") long id) throws ResourceFoundExceptions{
+		categoryService.deleteCategory(id);
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(new ResponseObject("ok", "Delete category successsful", categoryService.deleteCategory(id)));
+				.body(String.format("delete category successfully"));
 	}
 	@GetMapping
-	public ResponseEntity<ResponseObject> getAllCategories() {
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(new ResponseObject("ok", "List Category successfully", categoryService.getAllCategory()));
+	public List<CategoryDto> getAllCategories() {
+		return categoryService.getAllCategory();
 	}	
 }
