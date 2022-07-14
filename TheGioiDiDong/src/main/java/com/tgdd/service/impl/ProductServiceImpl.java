@@ -79,9 +79,12 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<ProductDto> getAllProductbyCategory(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<?> getAllProductbyCategory(Integer categoryId) {
+		List<Product> list = productRepository.getProductbyIdcategory(categoryId);
+		List<ProductDto> dto = new ArrayList<ProductDto>();
+		list.forEach(b -> dto.add(modelMapper.map(b, ProductDto.class)));
+		return ResponseEntity.ok(dto) ;
+		
 	}
 
 	@Override

@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.tgdd.entity.Product;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
-	@Query("SELECT p FROM Product p where id_Category = :idCategory")
-	 List<Product> getProductbyIdcategory(@Param("idCategory")Long id);
+public interface ProductRepository extends JpaRepository<Product, Integer> {
+	@Query("SELECT p FROM Product p where Category_id = :categoryId")
+	 List<Product> getProductbyIdcategory(@Param("categoryId")Integer id);
 	  List<Product> findByProductName(String productName);
-	  Product findByProductId(Long id);
+	  Product findByProductId(Integer id);
 }
