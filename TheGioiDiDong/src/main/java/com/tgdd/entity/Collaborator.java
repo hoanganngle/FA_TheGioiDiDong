@@ -30,5 +30,24 @@ public class Collaborator implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "role_id")
 	private Role role;
+	public String getCollabName() {
+		return collabName;
+	}
+	public void setCollabName(String collabName) {
+		this.collabName = collabName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
+	
 }
