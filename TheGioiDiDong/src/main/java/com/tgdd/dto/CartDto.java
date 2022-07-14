@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import nashtech.ass.phuochg.coffeeshop.dto.ProductCartDto;
 
 @Getter
 @Setter
@@ -26,6 +27,8 @@ public class CartDto {
 	private Long product_id;
 	
 	private Long store_id;
+	
+	private ProductCartDto products;
 	
 	
 

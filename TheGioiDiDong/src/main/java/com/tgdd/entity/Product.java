@@ -1,6 +1,7 @@
 package com.tgdd.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,6 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import nashtech.ass.phuochg.coffeeshop.entities.CartItem;
 
 @Entity
 @Data
@@ -56,6 +58,6 @@ public class Product implements Serializable {
 	@OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
 	private Set<OrderDetail> orderDetails;
 	@OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
-	private Set<Cart> carts;
+	private Collection<Cart> cartCollection;
 
 }

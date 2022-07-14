@@ -1,11 +1,13 @@
 package com.tgdd.service;
+import java.util.Collection;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tgdd.dto.CartDto;
 @Service
 public interface CartService {
-	public ResponseEntity<?> getCartByPhoneNumber(Long phoneNumber);
+	public Collection<CartDto> getCartByPhoneNumber(Long phoneNumber);
 	
 	public ResponseEntity<?> addCart(CartDto cartDto);
 	

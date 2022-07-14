@@ -12,7 +12,7 @@ public interface CustomerService {
 	
 	public CustomerDto addCustomer(CustomerDto customerDto);
 	
-	public ResponseEntity<?> getOrdersbyPhoneNumber(Long phoneNuber);
+	public ResponseEntity<?> getOrdersbyPhoneNumber(Long phoneNumber);
 	
 	public Customer getCustomerByPhoneNumber(Long phoneNumber);
 	
