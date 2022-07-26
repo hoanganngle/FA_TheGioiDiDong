@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public  ResponseEntity<?> updateProduct(Integer id, ProductDto productDto) {
+	public  ProductDto updateProduct(Integer id, ProductDto productDto) {
 				Optional<Product> optionalProduct = productRepository.findById(id);
 				if(!optionalProduct.isPresent()) {
 					throw new ResourceFoundExceptions("Product not found");
