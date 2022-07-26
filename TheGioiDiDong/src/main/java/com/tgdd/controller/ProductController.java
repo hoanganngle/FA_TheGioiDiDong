@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tgdd.repository.ProductRepository;
+import com.tgdd.dto.CategoryDto;
 import com.tgdd.dto.ProductDto;
 import com.tgdd.entity.Product;
 import com.tgdd.entity.ResponseObject;
@@ -31,14 +32,14 @@ public class ProductController {
 	@PostMapping("/")
 //	@PreAuthorize("hasAuthority('admin')")
 
-	public ResponseEntity<?> addProduct(@Valid @RequestBody ProductDto productDto) {
+	public ProductDto addProduct(@Valid @RequestBody ProductDto productDto) {
 		return productServices.addProduct(productDto);
 	}
 
 	@PutMapping("/{id}")
 //	@PreAuthorize("hasAuthority('admin')")
 
-	public ResponseEntity<?> updateProduct(@PathVariable("id") Integer id, @Valid @RequestBody ProductDto productDto) {
+	public ProductDto updateProduct(@PathVariable("id") Integer id, @Valid @RequestBody ProductDto productDto) {
 
 		return productServices.updateProduct(id, productDto);
 
@@ -51,7 +52,7 @@ public class ProductController {
 	}
 
 	@GetMapping
-	public ResponseEntity<?> getAllProducts() {
+	public List<ProductDto> getAllProducts() {
 		return productServices.getAllProduct();
 	}
 
