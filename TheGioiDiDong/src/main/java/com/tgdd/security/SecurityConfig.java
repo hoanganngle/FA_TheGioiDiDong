@@ -12,16 +12,8 @@ public class SecurityConfig {
         .formLogin()
         
         .permitAll()
+
         .loginPage("/login")
         .usernameParameter("txtUsername")
         .passwordParameter("txtPassword")
-        .loginProcessingUrl("/")
-        .defaultSuccessUrl("/addProduct")
-        .and()
-        
-        .logout()
-        .logoutUrl("/logout")
-        .logoutSuccessUrl("/logoutSuccess")
-        .permitAll();
-    }
 }

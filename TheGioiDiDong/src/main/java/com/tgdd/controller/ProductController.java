@@ -22,6 +22,7 @@ import com.tgdd.entity.Product;
 import com.tgdd.entity.ResponseObject;
 import com.tgdd.service.ProductService;
 @RestController
+@RequestMapping("products")
 public class ProductController {
 //	Preauthorize chưa có login nên để vào cmt
 	@Autowired
