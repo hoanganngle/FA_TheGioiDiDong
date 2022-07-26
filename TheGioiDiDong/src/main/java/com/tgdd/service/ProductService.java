@@ -22,5 +22,5 @@ public interface ProductService {
 
 	public ProductDto findByIdProduct(Integer id);
 
-	public ProductDto getAllProductbyCategory(Integer categoryId);
+	public ResponseEntity<List<ProductDto>> getAllProductbyCategory(Integer categoryId);
 }

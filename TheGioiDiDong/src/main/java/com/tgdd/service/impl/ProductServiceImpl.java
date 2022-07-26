@@ -30,7 +30,7 @@ public class ProductServiceImpl implements ProductService{
 	
 	
 	@Override
-	public ResponseEntity<?> addProduct(ProductDto productDto) {
+	public ProductDto addProduct(ProductDto productDto) {
 		Optional<Category> optionalCategory = categoryRepository.findById(productDto.getCategory().getCategoryId());
 		if(!optionalCategory.isPresent()) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Category not found"));
@@ -71,15 +71,15 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public ResponseEntity<?> getAllProduct() {
+	public List<ProductDto> getAllProduct() {
 		List<Product> list = productRepository.findAll();
 		List<ProductDto> dto = new ArrayList<ProductDto>();
 		list.forEach(b -> dto.add(modelMapper.map(b, ProductDto.class)));
-		return ResponseEntity.ok(dto) ;
+		return dto ;
 	}
 
 	@Override
-	public ResponseEntity<?> getAllProductbyCategory(Integer categoryId) {
+	public ResponseEntity<List<ProductDto>> getAllProductbyCategory(Integer categoryId) {
 		List<Product> list = productRepository.getProductbyIdcategory(categoryId);
 		List<ProductDto> dto = new ArrayList<ProductDto>();
 		list.forEach(b -> dto.add(modelMapper.map(b, ProductDto.class)));
