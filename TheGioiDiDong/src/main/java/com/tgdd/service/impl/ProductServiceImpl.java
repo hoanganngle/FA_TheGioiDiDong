@@ -18,55 +18,51 @@ import com.tgdd.exceptions.handlers.ResourceFoundExceptions;
 import com.tgdd.repository.CategoryRepository;
 import com.tgdd.repository.ProductRepository;
 import com.tgdd.response.MessageResponse;
+
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductRepository productRepository;
 	@Autowired
-	 CategoryRepository categoryRepository;
+	CategoryRepository categoryRepository;
 	@Autowired
-	 ModelMapper modelMapper;
+	ModelMapper modelMapper;
 
-	
-	
 	@Override
 	public ProductDto addProduct(ProductDto productDto) {
 		Optional<Category> optionalCategory = categoryRepository.findById(productDto.getCategory().getCategoryId());
-		if(!optionalCategory.isPresent()) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Category not found"));
+		if (!optionalCategory.isPresent()) {
+			throw new ResourceFoundExceptions("Category not found");
 		}
-		
-		productRepository.save(modelMapper.map(productDto,Product.class));
-		return ResponseEntity.ok(new MessageResponse("Add new Product successfully"));
+
+		productRepository.save(modelMapper.map(productDto, Product.class));
+		throw new ResourceFoundExceptions("Add new Product successfully");
 	}
 
 	@Override
-	public  ProductDto updateProduct(Integer id, ProductDto productDto) {
-				Optional<Product> optionalProduct = productRepository.findById(id);
-				if(!optionalProduct.isPresent()) {
-					throw new ResourceFoundExceptions("Product not found");
-				}
-				Optional<Category> optionalCategory = categoryRepository.findById(productDto.getCategory().getCategoryId());
-				if(!optionalCategory.isPresent()) {
-					return ResponseEntity.badRequest().body(new MessageResponse("Category not found"));
-				}
-				
-				
-				Product product = optionalProduct.get();
-
-				modelMapper.map(productDto, product);
-				product = productRepository.save(product);
-				return ResponseEntity.ok(new MessageResponse("Update Product successfully"));
+	public ProductDto updateProduct(Integer id, ProductDto productDto) {
+		Optional<Product> optionalProduct = productRepository.findById(id);
+		if (!optionalProduct.isPresent()) {
+			throw new ResourceFoundExceptions("Product not found");
+		}
+		Optional<Category> optionalCategory = categoryRepository.findById(productDto.getCategory().getCategoryId());
+		if (!optionalCategory.isPresent()) {
+			throw new ResourceFoundExceptions("Category not found");
+		}
+		Product product = optionalProduct.get();
+		modelMapper.map(productDto, product);
+		product = productRepository.save(product);
+		 throw new ResourceFoundExceptions("Update Product successfully");
 	}
 
 	@Override
 	public ResponseEntity<?> deleteProduct(Integer id) {
 		Optional<Product> optional = productRepository.findById(id);
-		if(optional.isPresent()) {
+		if (optional.isPresent()) {
 			Product product = optional.get();
 			productRepository.delete(product);
-				return ResponseEntity.ok(new MessageResponse("The book deleted successfully")) ;
-			}	
+			throw new ResourceFoundExceptions("The book deleted successfully");
+		}
 		throw new ResourceFoundExceptions("Product is not found");
 	}
 
@@ -75,7 +71,7 @@ public class ProductServiceImpl implements ProductService{
 		List<Product> list = productRepository.findAll();
 		List<ProductDto> dto = new ArrayList<ProductDto>();
 		list.forEach(b -> dto.add(modelMapper.map(b, ProductDto.class)));
-		return dto ;
+		return dto;
 	}
 
 	@Override
@@ -83,17 +79,17 @@ public class ProductServiceImpl implements ProductService{
 		List<Product> list = productRepository.getProductbyIdcategory(categoryId);
 		List<ProductDto> dto = new ArrayList<ProductDto>();
 		list.forEach(b -> dto.add(modelMapper.map(b, ProductDto.class)));
-		return ResponseEntity.ok(dto) ;
-		
+		return ResponseEntity.ok(dto);
+
 	}
 
 	@Override
 	public ProductDto findByIdProduct(Integer id) {
-				Optional<Product> optional = productRepository.findById(id);
-				if(optional.isPresent()) {
-					Product product = optional.get();
-					return modelMapper.map(product, ProductDto.class);
-				}
-				throw new ResourceFoundExceptions("Product not found");
+		Optional<Product> optional = productRepository.findById(id);
+		if (optional.isPresent()) {
+			Product product = optional.get();
+			return modelMapper.map(product, ProductDto.class);
+		}
+		throw new ResourceFoundExceptions("Product not found");
 	}
 }
