@@ -49,7 +49,7 @@ public class Product implements Serializable {
 	private boolean status;
 	private Integer unit;
 	@ManyToOne
-	@JoinColumn(name = "manufacture_id")
+	@JoinColumn(name = "manufacturer_id")
 	private Manufacturer manufacturer;
 	@ManyToOne
 	@JoinColumn(name = "category_id")

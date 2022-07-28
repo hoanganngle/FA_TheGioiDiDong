@@ -5,22 +5,22 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.tgdd.dto.CategoryDto;
 import com.tgdd.dto.ProductDto;
-import com.tgdd.entity.Product;
+import com.tgdd.exceptions.handlers.ResourceNotFoundException;
 
 @Service
 public interface ProductService {
 
-	public ProductDto addProduct(ProductDto productDto);
+	ResponseEntity<?> addProduct(ProductDto productDtO);
 
-	public ProductDto updateProduct(Integer id, ProductDto productDto);
+	ResponseEntity<?> updateProduct(long id, ProductDto productDTO) throws ResourceNotFoundException;
 
-	public ResponseEntity<?> deleteProduct(Integer id);
+	ResponseEntity<?> deleteProduct(long id) throws ResourceNotFoundException;
 
-	public List<ProductDto> getAllProduct();
+	ResponseEntity<?> getAllProduct();
 
-	public ProductDto findByIdProduct(Integer id);
+	List<ProductDto> getAllProductbyCategory(long id);
 
-	public ResponseEntity<List<ProductDto>> getAllProductbyCategory(Integer categoryId);
+
+	ProductDto findByIdProduct(long id) throws ResourceNotFoundException;
 }
