@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ManufacturerDto {
 	private Long manufacturerId;
-	@NotEmpty
 	private String manufacturerName;
 
 

@@ -11,19 +11,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Data
 @Getter
 @Setter
 @AllArgsConstructor
@@ -39,14 +38,14 @@ public class Product implements Serializable {
 	private Long productId;
 	@Column(name = "product_name")
 	private String productName;
-	private Integer price;
+	private Double price;
 	@Column(name = "product_warranty")
 	private Integer productWarranty;
 	private String image;
 	private String description;
 	@Column(name = "store_name")
 	private String storeName;
-	private boolean status;
+	private Boolean status;
 	private Integer unit;
 	@ManyToOne
 	@JoinColumn(name = "manufacturer_id")

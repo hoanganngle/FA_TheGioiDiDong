@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 import com.tgdd.service.ProductService;
 import com.tgdd.dto.ProductDto;
 import com.tgdd.entity.Category;
+import com.tgdd.entity.Manufacturer;
 import com.tgdd.entity.Product;
 import com.tgdd.exceptions.handlers.ResourceNotFoundException;
 import com.tgdd.repository.CategoryRepository;
+import com.tgdd.repository.ManufacturerRepository;
 import com.tgdd.repository.ProductRepository;
 import com.tgdd.response.MessageResponse;
 
@@ -25,6 +27,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
+	
+	@Autowired
+	private ManufacturerRepository manufacturerRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -37,12 +42,13 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ResponseEntity<?> addProduct(ProductDto productDTO) {
 		Optional<Category> categoryOptional = categoryRepository.findById(productDTO.getCategory().getCategoryId());
+		Optional<Manufacturer> maufacturerOptional =  manufacturerRepository.findById(productDTO.getManufacturer().getManufacturerId());
 
 		if (!categoryOptional.isPresent()) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Category not found"));
 		}
-		if (!categoryOptional.isPresent()) {
-			return ResponseEntity.badRequest().body(new MessageResponse("SubCategory not found"));
+		if (!maufacturerOptional.isPresent()) {
+			return ResponseEntity.badRequest().body(new MessageResponse("<anufacturer not found"));
 		}
 
 		productRepository.save(modelMapper.map(productDTO, Product.class));

@@ -2,6 +2,8 @@ package com.tgdd.controller;
 
 
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.tgdd.dto.CategoryDto;
 import com.tgdd.dto.ManufacturerDto;
 import com.tgdd.entity.ResponseObject;
+import com.tgdd.exceptions.handlers.ResourceFoundExceptions;
 import com.tgdd.service.ManufacturerService;
 
 @RestController
@@ -31,20 +36,18 @@ public class ManufacturerController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<ResponseObject> updateManufacturer(@PathVariable long id,@Valid @RequestBody ManufacturerDto manufacturerDto) {
-		return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "update Manufacturer successfully",
-				manufacturerService.updateManufacturer(id, manufacturerDto)));
+	public ManufacturerDto updateManufacturer(@PathVariable long id,@Valid @RequestBody ManufacturerDto manufacturerDto) throws ResourceFoundExceptions {
+		return manufacturerService.updateManufacturer(id, manufacturerDto);
 	}
-
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ResponseObject> deleteManufacturer(@PathVariable("id") long id) {
+	public ResponseEntity<?> deleteManufacturer(@PathVariable("id") long id) throws ResourceFoundExceptions{
+		manufacturerService.deleteManufacturer(id);
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(new ResponseObject("ok", "Delete Manufacturer successsful", manufacturerService.deleteManufacturer(id)));
+				.body(String.format("delete Manufacturer successfully"));
 	}
 	@GetMapping
-	public ResponseEntity<ResponseObject> getAllCategories() {
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(new ResponseObject("ok", "List Manufacturer successfully", manufacturerService.getAllManufacturer()));
-	}
+	public List<ManufacturerDto> getAllManufacturer() {
+		return manufacturerService.getAllManufacturer();
+	}	
 
 }
