@@ -94,11 +94,19 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<ProductDto> getAllProductbyCategory(long id) {
+	public ResponseEntity<?> getAllProductbyCategory(long id) {
 		List<Product> list = productRepository.getProductbyIdcategory(id);
 		List<ProductDto> dto = new ArrayList<ProductDto>();
 		list.forEach(b -> dto.add(modelMapper.map(b, ProductDto.class)));
-		return dto;
+		return ResponseEntity.ok(dto);
+	}
+	
+	@Override
+	public ResponseEntity<?> getProductbyProductName(String name) {
+		List<Product> list = productRepository.getProductbyProductName(name);
+		List<ProductDto> dto = new ArrayList<ProductDto>();
+		list.forEach(b -> dto.add(modelMapper.map(b, ProductDto.class)));
+		return ResponseEntity.ok(dto);
 	}
 
 	@Override

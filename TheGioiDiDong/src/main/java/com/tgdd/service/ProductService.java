@@ -19,7 +19,9 @@ public interface ProductService {
 
 	ResponseEntity<?> getAllProduct();
 
-	List<ProductDto> getAllProductbyCategory(long id);
+	ResponseEntity<?> getAllProductbyCategory(long id);
+	
+	ResponseEntity<?> getProductbyProductName(String name);
 
 
 	ProductDto findByIdProduct(long id) throws ResourceNotFoundException;

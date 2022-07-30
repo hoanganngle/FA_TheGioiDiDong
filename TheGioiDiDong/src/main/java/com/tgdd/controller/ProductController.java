@@ -48,11 +48,25 @@ public class ProductController {
 	public ResponseEntity<?> getAllProducts() {
 		return productServices.getAllProduct();
 	}
-
+	
 	@GetMapping("/{id}")
 
+	public ProductDto getProductbyID(@PathVariable("id") long id) {
+		return productServices.findByIdProduct(id);
+	}
+
+
+	@GetMapping("/product_search/{name}")
+
+	public ResponseEntity<?> getProductbyName(@PathVariable("name") String name) {
+
+		return productServices.getProductbyProductName(name);
+	}
+	
+	@GetMapping("/product_category/{id}")
+
 	public ResponseEntity<?> getAllProductsByCategory(@PathVariable("id") long id) {
-		productServices.getAllProductbyCategory(id);
-		return ResponseEntity.status(HttpStatus.OK).body("List product successfully");
+
+		return productServices.getAllProductbyCategory(id);
 	}
 }
