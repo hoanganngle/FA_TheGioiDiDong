@@ -26,10 +26,10 @@ public class Collaborator implements Serializable {
 	@Id
 	@Column(name = "collab_name")
 	private String collabName;
+	@Column(name = "password")
 	private String password;
-	@ManyToOne
-	@JoinColumn(name = "role_id")
-	private Role role;
+	@Column(name = "role_id")
+	private String role;
 	public String getCollabName() {
 		return collabName;
 	}
@@ -42,10 +42,10 @@ public class Collaborator implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Role getRole() {
+	public String getRole() {
 		return role;
 	}
-	public void setRole(Role role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 
